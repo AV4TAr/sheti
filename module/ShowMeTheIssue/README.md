@@ -7,7 +7,7 @@ Publishes issues from bitbucket in hipchat rooms
 ## Usage
 
 ```
-php public/index.php issues process --enable-hipchat --hipchat-room=573590 --add-image
+php public/index.php issues process --hipchat-room=573590 --add-image --enable-hipchat --verbose
 ```
 
 # TODO
