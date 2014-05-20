@@ -1,3 +1,23 @@
 # Show me the issue
 
-Publish issues in hipchat rooms
+Publishes issues from bitbucket in hipchat rooms
+
+## Configuration
+
+## Usage
+
+```
+php public/index.php issues process --enable-hipchat --hipchat-room=573590 --add-image
+```
+
+# TODO
+
+  - Create a service
+  - Do some real software engineering shit over here.
+  - get issues from github
+  - dry-run by default :)
+  
+  
+# Disclaimer
+
+  - Nightly hack with a wiskey.
