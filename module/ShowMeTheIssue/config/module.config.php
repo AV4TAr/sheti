@@ -34,7 +34,7 @@ return array(
             'routes' => array(
                 'get-issues' => array(
                     'options' => array(
-                        'route' => 'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v]',
+                        'route' => 'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--repo=] [--verbose|-v]',
                         'defaults' => array(
                             'controller' => 'ShowMeTheIssue\Controller\Show',
                             'action' => 'process'

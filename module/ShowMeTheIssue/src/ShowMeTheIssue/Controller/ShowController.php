@@ -1,11 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ShowMeTheIssue for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 namespace ShowMeTheIssue\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -25,15 +18,15 @@ class ShowController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
         
-        $enableHipchat = $request->getParam('enable-hipchat');
-        $addImage = $request->getParam('add-image', false);
-        $defaultRoom = $request->getParam('hipchat-room');
-        $verbose     = $request->getParam('verbose');
+        $enableHipchat  = $request->getParam('enable-hipchat');
+        $addImage       = $request->getParam('add-image', false);
+        $defaultRoom    = $request->getParam('hipchat-room');
+        $verbose        = $request->getParam('verbose');
+        $filterRepo     = $request->getParam('repo',false);
 
+        
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
-        
         $oauthListener = new OAuthListener($config['bitbucket']['oauth']);
-        
         
         $issue = new Issues();
         $issue->getClient()->addListener($oauthListener);
@@ -41,6 +34,9 @@ class ShowController extends AbstractActionController
         foreach ($config['repo-mapping'] as $data) {
             try {
                 if (isset($data['skip']) && $data['skip'] == true) {
+                    continue;
+                }
+                if($filterRepo !== false && $filterRepo !== $data['repo']){
                     continue;
                 }
                 $oauthListener = new OAuthListener($config['bitbucket']['oauth']);

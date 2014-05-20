@@ -39,10 +39,11 @@ class Module implements AutoloaderProviderInterface
     public function getConsoleUsage(Console $console){
         return array(
             'Posts issues to hipchat room',
-            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v]'    => 'Process issues.',
+            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'    => 'Process issues.',
             array('--add-image', 'Add image when publishing'),
             array('--enable-hipchat', 'Publish issues to hipchat'),
             array('--hipchat-room=HIPCHAT_GROUP_ID', 'Use a default room to post issues, used for debugging'),
+            array('--repo=REPOSITORY_ID', 'Will process only this repository'),
             array('--verbose|-v', '(optional) turn on verbose mode')
         );
     }
