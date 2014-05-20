@@ -73,8 +73,8 @@ class ShowController extends AbstractActionController
                     $hc->message_room($hipchatRoom, 'Issues', $issue_msg);
                 }
     
-                echo nl2br($issue_msg);
-                echo "<br>-------------------------------------------------\r";
+                //echo nl2br($issue_msg);
+                //echo "<br>-------------------------------------------------\r";
             } catch (\Exception $e){
                 echo $e->getMessage();
             }
