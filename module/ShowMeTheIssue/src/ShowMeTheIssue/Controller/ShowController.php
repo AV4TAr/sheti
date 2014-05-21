@@ -44,13 +44,17 @@ class ShowController extends AbstractActionController
                 $issue = new Issues();
                 $issue->getClient()->addListener($oauthListener);
                 if($verbose){ echo '>>>> Getting issues from Bitbucket - '.$data['repo'].PHP_EOL; }
+                print_r( $config['bitbucket']['issue-filters']); 
                 $issue_response = json_decode($issue->all($config['bitbucket']['account-name'], $data['repo'], $config['bitbucket']['issue-filters'])->getContent());
                 
                 $issue_msg = '<b>issue report from code repository: '.$data['repo'].'</b><br/>';
                 if($verbose){ echo '***** REPO: '.$data['repo'].PHP_EOL; }
                 $issue_msg .= '<a href="' . $data['issue-tracker-link'] . '">Issue tracker</a><br/>';
                 if (count($issue_response->issues) == 0) {
-                    $issue_msg .= '<b> NO ISSUES!!! Keep it up.</b><br/><img src="' . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)] . '"/>';
+                    $issue_msg .= '<b> NO ISSUES!!! Keep it up.</b>';
+                    if($addImage){
+                        $issue_msg .= '<br/><img src="' . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)] . '"/>';
+                    }
                     if($verbose){ echo '    No issues'.PHP_EOL; }
                 } else {
                     foreach ($issue_response->issues as $issue) {
