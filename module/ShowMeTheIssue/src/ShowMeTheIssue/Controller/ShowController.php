@@ -24,7 +24,7 @@ class ShowController extends AbstractActionController
 
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
 
-        $bitbucketService = $this->getServiceLocator()->get('BitbucketService');
+        
         
         foreach ($config['repo-mapping'] as $data) {
             try {
@@ -37,6 +37,8 @@ class ShowController extends AbstractActionController
                 
                 if($verbose){ echo '>>>> Getting issues from Bitbucket - '.$data['repo'].PHP_EOL; } 
                 
+//                $bitbucketService = $this->getServiceLocator()->get('BitbucketService');
+                $bitbucketService = $this->getServiceLocator()->get($config['service-mapper'][$data['repo']]);
                 $issue_response = $bitbucketService->getIssuesFromRepo($data['repo']);
                 
                 $issue_msg = '<b>issue report from code repository: '.$data['repo'].'</b><br/>';
