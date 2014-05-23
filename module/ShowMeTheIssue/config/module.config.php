@@ -35,11 +35,19 @@ return array(
             )
         )
     ),
-    'service_manager' => array(
-        'abstract_factories' => array(
+    'service_manager' => [
+        'invokables' => [
+            'ShowMeTheIssue\Issue' => 'ShowMeTheIssue\Entity\Issue'
+        ],
+        'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory'
-        )
-    )
-    
+        ],
+        'aliases' => [
+            'Issue' => 'ShowMeTheIssue\Issue'
+        ],
+        'shared' => [
+            'ShowMeTheIssue\Issue' => FALSE
+        ]
+    ]
 );
