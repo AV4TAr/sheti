@@ -1,5 +1,4 @@
 <?php
-use BitbucketConnector\BitbucketService;
 return [
     'show-me-the-issue' => [
         'service-mapper' => [
@@ -20,12 +19,7 @@ return [
     
     'service_manager' => [
         'factories' => [
-            'BitbucketConnector\BitbucketService' => function ($sm)
-            {
-                
-                $config = $sm->get('config');
-                return new BitbucketService($config['bitbucket-connector']);
-            }
+            'BitbucketConnector\BitbucketService' => 'BitbucketConnector\BitbucketServiceFactory'
         ],
         'aliases' => [
            'BitbucketService' => 'BitbucketConnector\BitbucketService', 

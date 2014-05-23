@@ -37,7 +37,9 @@ return array(
             'GithubConnector\GithubService' => function ($sm)
             {
                 $config = $sm->get('config');
-                return new GithubService($config['github-connector']);
+                $githubService = new GithubService($config['github-connector']);
+                $githubService->setServiceLocator($sm);
+                return $githubService;
             }
         ],
         'aliases' => [

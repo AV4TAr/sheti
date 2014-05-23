@@ -18,6 +18,10 @@ class GithubService implements RepoInterface, ServiceLocatorAwareInterface
 
     protected $config;
 
+    /**
+     * 
+     * @var \Github\HttpClient\CachedHttpClient
+     */
     protected $client;
     
     public function __construct(array $config)
