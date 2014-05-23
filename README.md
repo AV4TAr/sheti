@@ -13,4 +13,8 @@ Its a cli app that will connect to repos, get the issues, process them and publi
 
 # Usage
 
+```
+$ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]
+```
+
 # TODO
