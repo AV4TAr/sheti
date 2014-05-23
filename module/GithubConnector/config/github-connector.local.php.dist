@@ -1,0 +1,10 @@
+<?php
+return array(
+    'github-connector' => [
+        'account-name' => 'caseinc',
+
+        'issue-filters' => [
+           'state' => 'open'
+        ]
+    ]
+);

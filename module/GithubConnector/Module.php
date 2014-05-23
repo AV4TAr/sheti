@@ -10,7 +10,6 @@ namespace GithubConnector;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Console\Adapter\AdapterInterface as Console;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -37,11 +36,4 @@ class Module implements AutoloaderProviderInterface
 
     public function onBootstrap(MvcEvent $e)
     {}
-    
-    public function getConsoleUsage(Console $console){
-        return array(
-            'Test',
-            'test',
-        );
-    }
 }
