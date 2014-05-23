@@ -1,7 +1,7 @@
 <?php
 return array(
     'modules' => array(
-        'ShowMeTheIssue','BitbucketConnector',
+        'ShowMeTheIssue','BitbucketConnector','GithubConnector',
     ),
 
     'module_listener_options' => array(

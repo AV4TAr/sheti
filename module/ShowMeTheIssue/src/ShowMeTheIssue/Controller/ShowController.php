@@ -66,6 +66,7 @@ class ShowController extends AbstractActionController
                     }
                 }
                 
+                //publish.pre event
                 if ($enableHipchat) {
                     $hc = new HipChat($config['hipchat']['api-token']);
                     $hipchatRoom = $data['hipchat-room'];
@@ -75,9 +76,8 @@ class ShowController extends AbstractActionController
                     if($verbose){ echo 'Publishing issues to bitbucket room - '.$hipchatRoom.PHP_EOL; }
                     $hc->message_room($hipchatRoom, 'Issues', $issue_msg);
                 } 
-    
-                //echo nl2br($issue_msg);
-                //echo "<br>-------------------------------------------------\r";
+                //publish.post event
+                
             } catch (\Exception $e){
                 echo $e->getMessage();
             }

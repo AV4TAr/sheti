@@ -1,16 +1,13 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "framework",
-        "zf2"
-    ],
-    "homepage": "http://framework.zend.com/",
+    "name": "av4tar/show-me-the-issue",
+    "description": "Show issues from repositories in hipchat",
+    "license": "GPL",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.3.*",
         "gentle/bitbucket-api": "dev-master",
-        "hipchat/hipchat-php": ">=1.0.0"
+        "hipchat/hipchat-php": ">=1.0.0",
+        "knplabs/github-api": "*"
     }
 }

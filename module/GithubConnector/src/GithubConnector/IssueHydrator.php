@@ -1,5 +1,5 @@
 <?php
-namespace BitbucketConnector;
+namespace GithubConnector;
 
 use ShowMeTheIssue\Entity\IssueAbstract;
 /**
@@ -28,17 +28,6 @@ class IssueHydrator
      */
     public function hydrate(array $data, $object)
     {
-        $exchangeArray = [
-    	   'id' => $data['number'],
-    	   'title' => $data['title'],
-    	   'description' => $data['body'],
-    	   'asignee' => $data['asignee'],
-    	   'created_at' => $data['created_at'],
-    	   'updated_at' => $data['updated_at'],
-    	   'kind' => 'issue',
-    	   'priority' => '',
-    	   'status' => 'state'
-        ];
         $object->exchangeArray($data);        
     }
 
