@@ -12,4 +12,29 @@
  */
 
 return array(
+    'show-me-the-issue' => array(
+        'hipchat' => [
+            'api-token' => 'HIPCHAT TOKEN'
+        ],
+        'repo-mapping' => [
+            [
+                'repo-type' => 'bitbucket',
+                'repo' => 'prj-ourplan-pull',
+                'issue-tracker-link' => 'https://bitbucket.org/caseinc/lepatner-arazoo/issues?status=new&status=open',
+                'hipchat-room' => '573590',
+                'skip' => false
+            ]
+        ]
+    ),
+    'bitbucket-connector' => [
+        'account-name' => 'caseinc',
+        'oauth' => [
+            'oauth_consumer_key' => 'OAUTH-KEY',
+            'oauth_consumer_secret' => 'OAUTH-SECRET'
+        ],
+        'issue-filters' => [
+            'kind' => 'bug',
+            'status' => 'new'
+        ]
+    ]
 );
