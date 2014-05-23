@@ -1,0 +1,14 @@
+<?php
+return array(
+    'bitbucket-connector' => [
+        'account-name' => 'caseinc',
+        'oauth' => [
+            'oauth_consumer_key' => 'OAUTH_KEY',
+            'oauth_consumer_secret' => 'OAUTH_SECRET'
+        ],
+        'issue-filters' => [
+            'kind' => 'bug',
+            'status' => 'new'
+        ]
+    ]
+);
