@@ -1,6 +1,7 @@
 # Show me the isse
 
 The prupose of this app is to publish issues from different repositories in hipchat rooms.
+Its a cli app that will connect to repos, get the issues, process them and publish them in hipchat rooms.
 
 ## Problem
 
