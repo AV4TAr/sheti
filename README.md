@@ -26,3 +26,4 @@ $ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [-
   - Move HipchatPublisher to a module
   - Add Publisher for IRC
   - Make issue processor event driven and make publisher listen those.
+  - Create template / entity for publisher messages.
