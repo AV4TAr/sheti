@@ -37,7 +37,7 @@ class IssueHydrator
     	   'updated_at' => $data['updated_at'],
     	   'kind' => 'issue',
     	   'priority' => '',
-    	   'status' => 'state'
+    	   'status' => $data['state'],
         ];
         $object->exchangeArray($data);        
     }
