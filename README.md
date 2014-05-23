@@ -19,6 +19,7 @@ $ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [-
 
 # TODO
 
+  - Add tests for service & Connectors
   - Create a service
   - Do some real software engineering shit over here.
   - Add connegtor for GitHub (doing)
