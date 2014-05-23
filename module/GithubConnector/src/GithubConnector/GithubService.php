@@ -4,7 +4,7 @@ namespace GithubConnector;
 use ShowMeTheIssue\Repo\RepoInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use BitbucketConnector\IssueHydrator;
-use ShowMeTheIssue\Entity\IssueAbstract;
+use ShowMeTheIssue\Entity\Issue;
 
 /**
  * Connects with Github
@@ -22,6 +22,8 @@ class GithubService implements RepoInterface, ServiceLocatorAwareInterface
     
     public function __construct(array $config)
     {
+        $this->config = $config;
+        
         $client = new \Github\HttpClient\CachedHttpClient();
         $client->setCache(new \Github\HttpClient\Cache\FilesystemCache('./data/cache/github-api-cache'));
         
@@ -39,20 +41,24 @@ class GithubService implements RepoInterface, ServiceLocatorAwareInterface
         } catch (\Github\Exception\InvalidArgumentException $e) {
             die("Argumentos invalidos para la conexion");
         }
+        
     }
 
     /**
      * (non-PHPdoc)
      * 
-     * @see \ShowMeTheIssue\src\ShowMeTheIssue\Repo\RepoInterface::getIssues() return ShowMeTheIssue\Entity\Issue[]
+     * @see \ShowMeTheIssue\src\ShowMeTheIssue\Repo\RepoInterface::getIssues() 
+     * @return ShowMeTheIssue\Entity\Issue[]
+     * @todo inject hydrator
+     * @todo inject IssueService
      */
     public function getIssuesFromRepo($repo = 'bim-analytics-backend', array $filter = ['state' => 'open'])
     {
-        $issues = $this->client->api('issue')->all('caseinc', $repo, $filter);
+        $issues = $this->client->api('issue')->all($this->config['account-name'], $repo, $filter);
         $issueList = [];
         $issueHydrator = new IssueHydrator();
         foreach ($issues as $issue) {
-            $issueObject = new IssueAbstract();
+            $issueObject = new Issue();
             $issueHydrator->hydrate($issue, $issueObject);
             $issueList[] = $issueObject;
         }

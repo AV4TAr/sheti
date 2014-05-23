@@ -9,7 +9,7 @@ use Zend\Stdlib\JsonSerializable;
  * @author diego
  *        
  */
-class IssueAbstract implements ArraySerializableInterface, JsonSerializable
+class Issue implements ArraySerializableInterface, JsonSerializable
 {
 
     public $id;
