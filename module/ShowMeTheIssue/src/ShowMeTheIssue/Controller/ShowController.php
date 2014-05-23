@@ -23,8 +23,6 @@ class ShowController extends AbstractActionController
         $filterRepo     = $request->getParam('repo',false);
 
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
-
-        
         
         foreach ($config['repo-mapping'] as $data) {
             try {
@@ -35,25 +33,33 @@ class ShowController extends AbstractActionController
                     continue;
                 }
                 
-                if($verbose){ echo '>>>> Getting issues from Bitbucket - '.$data['repo'].PHP_EOL; } 
                 
-//                $bitbucketService = $this->getServiceLocator()->get('BitbucketService');
-                $bitbucketService = $this->getServiceLocator()->get($config['service-mapper'][$data['repo']]);
-                $issue_response = $bitbucketService->getIssuesFromRepo($data['repo']);
+                if($this->getServiceLocator()->has($config['service-mapper'][$data['repo-type']])){
+                    $repoService = $this->getServiceLocator()->get($config['service-mapper'][$data['repo-type']]);
+                } else {
+                    if($verbose){ echo '***** No service declared for repository type: '.$data['repo-type'].PHP_EOL; }
+                    continue;
+                }
+                
+                if($verbose){ echo '>>>> Getting issues from '.ucfirst($data['repo-type']).' - '.$data['repo'].PHP_EOL; }
+                
+                $issue_response = $repoService->getIssuesFromRepo($data['repo']);
                 
                 $issue_msg = '<b>issue report from code repository: '.$data['repo'].'</b><br/>';
-                if($verbose){ echo '***** REPO: '.$data['repo'].PHP_EOL; }
+                if($verbose){ echo '   REPO: '.$data['repo'].PHP_EOL; }
                 $issue_msg .= '<a href="' . $data['issue-tracker-link'] . '">Issue tracker</a><br/>';
                 if (count($issue_response) == 0) {
                     $issue_msg .= '<b> NO ISSUES!!! Keep it up.</b>';
                     if($addImage){
                         $issue_msg .= '<br/><img src="' . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)] . '"/>';
                     }
-                    if($verbose){ echo '    No issues'.PHP_EOL; }
+                    if($verbose){ echo '       No issues'.PHP_EOL; }
                 } else {
+                    $i = 1;
                     foreach ($issue_response as $issue) {
                         $issue_msg .= $issue->title . '<br/>';
-                        if($verbose){ echo '    '.$issue.PHP_EOL; }
+                        if($verbose){ echo '       '.$i.' - '.$issue.PHP_EOL; }
+                        $i++;
                     }
                     if($addImage){
                         $issue_msg .= '<img src="' . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)] . '"/>';

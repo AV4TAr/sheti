@@ -6,6 +6,7 @@ use Bitbucket\API\Repositories\Issues;
 use Bitbucket\API\Http\Listener\OAuthListener;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ShowMeTheIssue\Entity\Issue;
+use ShowMeTheIssue\Entity\IssueAbstract;
 
 /**
  * Connects with Bitbucket
@@ -55,7 +56,7 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
         $issueList = [];
         $issueHydrator = new IssueHydrator();
         foreach($issues['issues'] as $issue){
-           $issueObject = new Issue();
+           $issueObject = new IssueAbstract();
            $issueHydrator->hydrate($issue, $issueObject);
            $issueList[] = $issueObject;
         }

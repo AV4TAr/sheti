@@ -8,6 +8,7 @@ namespace ShowMeTheIssue\Entity;
  */
 class IssueAbstract
 {
+    public $id;
     public $title;
     public $description;
     public $asignee;
