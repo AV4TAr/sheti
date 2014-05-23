@@ -5,7 +5,6 @@ use ShowMeTheIssue\Repo\RepoInterface;
 use Bitbucket\API\Repositories\Issues;
 use Bitbucket\API\Http\Listener\OAuthListener;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use ShowMeTheIssue\Entity\Issue;
 use ShowMeTheIssue\Entity\IssueAbstract;
 
 /**
