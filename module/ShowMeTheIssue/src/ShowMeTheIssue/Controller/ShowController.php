@@ -3,8 +3,6 @@ namespace ShowMeTheIssue\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Request;
-use Bitbucket\API\Http\Listener\OAuthListener;
-use Bitbucket\API\Repositories\Issues;
 use HipChat\HipChat;
 
 class ShowController extends AbstractActionController
@@ -24,12 +22,9 @@ class ShowController extends AbstractActionController
         $verbose        = $request->getParam('verbose');
         $filterRepo     = $request->getParam('repo',false);
 
-        
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
-        $oauthListener = new OAuthListener($config['bitbucket']['oauth']);
-        
-        $issue = new Issues();
-        $issue->getClient()->addListener($oauthListener);
+
+        $bitbucketService = $this->getServiceLocator()->get('BitbucketService');
         
         foreach ($config['repo-mapping'] as $data) {
             try {
@@ -39,27 +34,24 @@ class ShowController extends AbstractActionController
                 if($filterRepo !== false && $filterRepo !== $data['repo']){
                     continue;
                 }
-                $oauthListener = new OAuthListener($config['bitbucket']['oauth']);
                 
-                $issue = new Issues();
-                $issue->getClient()->addListener($oauthListener);
-                if($verbose){ echo '>>>> Getting issues from Bitbucket - '.$data['repo'].PHP_EOL; }
-                print_r( $config['bitbucket']['issue-filters']); 
-                $issue_response = json_decode($issue->all($config['bitbucket']['account-name'], $data['repo'], $config['bitbucket']['issue-filters'])->getContent());
+                if($verbose){ echo '>>>> Getting issues from Bitbucket - '.$data['repo'].PHP_EOL; } 
+                
+                $issue_response = $bitbucketService->getIssuesFromRepo($data['repo']);
                 
                 $issue_msg = '<b>issue report from code repository: '.$data['repo'].'</b><br/>';
                 if($verbose){ echo '***** REPO: '.$data['repo'].PHP_EOL; }
                 $issue_msg .= '<a href="' . $data['issue-tracker-link'] . '">Issue tracker</a><br/>';
-                if (count($issue_response->issues) == 0) {
+                if (count($issue_response) == 0) {
                     $issue_msg .= '<b> NO ISSUES!!! Keep it up.</b>';
                     if($addImage){
                         $issue_msg .= '<br/><img src="' . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)] . '"/>';
                     }
                     if($verbose){ echo '    No issues'.PHP_EOL; }
                 } else {
-                    foreach ($issue_response->issues as $issue) {
+                    foreach ($issue_response as $issue) {
                         $issue_msg .= $issue->title . '<br/>';
-                        if($verbose){ echo '    '.$issue->title.PHP_EOL; }
+                        if($verbose){ echo '    '.$issue.PHP_EOL; }
                     }
                     if($addImage){
                         $issue_msg .= '<img src="' . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)] . '"/>';

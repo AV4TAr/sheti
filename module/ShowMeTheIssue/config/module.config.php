@@ -1,30 +1,17 @@
 <?php
 return array(
     'show-me-the-issue' => array(
-        'bitbucket' => [
-            'account-name' => 'caseinc',
-            'oauth' => [
-                'oauth_consumer_key' => '',
-                'oauth_consumer_secret' => ''
-            ],
-            'issue-filters' => [
-                'status' => 'new',
-                'kind' => 'bug',
-            ],
-        ],
         'hipchat' => [
             'api-token' => ''
         ],
-        'repo-mapping' => []
-        // [
-        // 'repo-type' => 'bitbucket',
-        // 'repo' => 'lepatner-arazoo',
-        // 'issue-tracker-link' => 'https://bitbucket.org/caseinc/lepatner-arazoo/issues?status=new&status=open',
-        // 'hipchat-room' => '573590',
-        // 'skip' => true
-        // ],
-        
-        
+        'repo-mapping' =>         // []
+        [
+            'repo-type' => 'bitbucket',
+            'repo' => 'lepatner-arazoo',
+            'issue-tracker-link' => 'https://bitbucket.org/caseinc/lepatner-arazoo/issues?status=new&status=open',
+            'hipchat-room' => '573590',
+            'skip' => true
+        ]
     ),
     
     'controllers' => array(
@@ -54,4 +41,5 @@ return array(
             'Zend\Log\LoggerAbstractServiceFactory'
         )
     )
+    
 );
