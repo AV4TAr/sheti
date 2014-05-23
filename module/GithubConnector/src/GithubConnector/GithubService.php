@@ -2,9 +2,9 @@
 namespace GithubConnector;
 
 use ShowMeTheIssue\Repo\RepoInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use BitbucketConnector\IssueHydrator;
 use ShowMeTheIssue\Entity\Issue;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Connects with Github
@@ -12,7 +12,7 @@ use ShowMeTheIssue\Entity\Issue;
  * @author diego
  *        
  */
-class GithubService implements RepoInterface, ServiceLocatorAwareInterface
+class GithubService implements RepoInterface
 {
     use\Zend\ServiceManager\ServiceLocatorAwareTrait;
 
@@ -24,9 +24,16 @@ class GithubService implements RepoInterface, ServiceLocatorAwareInterface
      */
     protected $client;
     
-    public function __construct(array $config)
+    /**
+     * 
+     * @param array $config
+     * @param ServiceLocatorInterface $serviceLocator $serviceLocator
+     * @throws \Exception
+     */
+    public function __construct(array $config, ServiceLocatorInterface $serviceLocator)
     {
         $this->config = $config;
+        $this->setServiceLocator($serviceLocator);
         
         $client = new \Github\HttpClient\CachedHttpClient();
         $client->setCache(new \Github\HttpClient\Cache\FilesystemCache('./data/cache/github-api-cache'));

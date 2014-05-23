@@ -12,8 +12,7 @@ class GithubServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator){
         $config = $serviceLocator->get('config');
-        $service = new GithubService($config['github-connector']);
-        //$githubService->setServiceLocator($sm);
+        $service = new GithubService($config['github-connector'], $serviceLocator);
         return $service;
     }
 }

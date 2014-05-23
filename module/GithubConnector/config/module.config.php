@@ -34,13 +34,7 @@ return array(
     ],
     'service_manager' => [
         'factories' => [
-            'GithubConnector\GithubService' => function ($sm)
-            {
-                $config = $sm->get('config');
-                $githubService = new GithubService($config['github-connector']);
-                $githubService->setServiceLocator($sm);
-                return $githubService;
-            }
+            'GithubConnector\GithubService' => 'GithubConnector\GithubServiceFactory'
         ],
         'aliases' => [
             'GithubService' => 'GithubConnector\GithubService'
