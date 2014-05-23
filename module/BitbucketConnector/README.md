@@ -1,4 +1,4 @@
-# Bitbucket connect for show-me-the-issue
+# Bitbucket connector for show-me-the-issue
 ## Usage
 Copy config/bitbucket-connector.local.php.dist to /config/autoload/bitbucket-connector.local.php
 
