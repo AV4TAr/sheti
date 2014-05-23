@@ -18,3 +18,11 @@ $ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [-
 ```
 
 # TODO
+
+  - Create a service
+  - Do some real software engineering shit over here.
+  - Add connegtor for GitHub (doing)
+  - Add connector for Jira
+  - Move HipchatPublisher to a module
+  - Add Publisher for IRC
+  - Make issue processor event driven and make publisher listen those.
