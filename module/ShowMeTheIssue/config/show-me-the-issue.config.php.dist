@@ -1,13 +1,54 @@
 <?php
+/**
+ * SHow mE The Issues configuration file
+ */
 return [
-    'repo-mapping' => [
-        [
-            'repo-type' => 'bitbucket',
-            'repo' => 'REPO_NAME',
-            'issue-tracker-link' => 'REPO_LINK',
-            'hipchat-room' => 'HIPCHAT_ROOM_ID',
-            'skip' => false // if true will not be processed
+    'show-me-the-issue' => array(
+        'hipchat' => [
+            'api-token' => 'HIPCHAT-TOKEN'
         ],
+        'repo-mapping' => [
+            /*
+            [
+                'repo-type' => 'github',
+                'repo' => 'sheti',
+                'issue-tracker-link' => 'https://github.com/AV4TAr/sheti/issues',
+                'hipchat-room' => '1234567',
+                'skip' => false,
+            ],
+            */
+        ]
+    ),
+    'bitbucket-connector' => [
+        'account-name' => 'ACCOUNT-NAME',
+        'oauth' => [
+            'oauth_consumer_key' => 'OAUTH-KEY',
+            'oauth_consumer_secret' => 'OAUTH-SECRET'
+        ],
+        /**
+         * What issues to filter
+         */
+        'issue-filters' => [
+            'kind' => 'bug',
+            'status' => 'new'
+        ]
     ],
+    'github-connector' => [
+        'account-name' => 'ACCOUNT-NAME',
+        'oauth' => [
+            // 'oauth_consumer_key' => 'CONSUMER-KEY',
+            // 'oauth_consumer_secret' => 'CONSUMER-SECRET'
+        ],
+        'user_connect' => [
+            'username' => 'USERNAME',
+            'password' => 'PASSWORD'
+        ],
+        /**
+         * What issues to filter
+         */
+        'issue-filters' => [
+            'state' => 'open'
+        ]
+    ]
 ];
             
