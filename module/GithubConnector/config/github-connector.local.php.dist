@@ -2,16 +2,6 @@
 return array(
     'github-connector' => [
         /**
-         * Account name user or team
-         */
-        'account-name' => '',
-        /**
-         * Default filters for issues
-         */
-        'issue-filters' => [ // How to filter issues
-            'state' => 'open'
-        ],
-        /**
          * User to use for connection
          */
         'user_connect' => [

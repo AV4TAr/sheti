@@ -1,15 +1,4 @@
 <?php
-/**
- * Local Configuration Override
- *
- * This configuration override file is for overriding environment-specific and
- * security-sensitive configuration information. Copy this file without the
- * .dist extension at the end and populate values as needed.
- *
- * @NOTE: This file is ignored from Git by default with the .gitignore included
- * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
- * credentials from accidentally being committed into version control.
- */
 return [
     'show-me-the-issue' => array(
         'hipchat' => [
@@ -48,13 +37,6 @@ return [
             'oauth_consumer_key' => 'OAUTH-KEY',
             'oauth_consumer_secret' => 'OAUTH-SECRET'
         ],
-        /**
-         * What issues to filter
-         */
-        'issue-filters' => [
-            'kind' => 'bug',
-            'status' => 'new'
-        ]
     ],
     'github-connector' => [
         'oauth' => [
@@ -65,11 +47,5 @@ return [
             'username' => 'USERNAME',
             'password' => 'PASSWORD'
         ],
-        /**
-         * What issues to filter
-         */
-        'issue-filters' => [
-            'state' => 'open'
-        ]
     ]
 ];
