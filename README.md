@@ -1,7 +1,10 @@
-# Show me the issues
+# SHow mE the Issues
 
-The prupose of this app is to publish issues from different repositories in hipchat rooms.
-Its a cli app that will connect to repos, get the issues, process them and publish them in hipchat rooms.
+SHETI : pronounced /ˈʃeti/
+
+The prupose of this app is to publish issues from different code repositories (bitbucket and github are currently supported) into hipchat rooms.
+
+It's a cli app that will connect to repos, get the issues, process them and publish them in hipchat rooms.
 
 ## Problem
 
@@ -20,8 +23,7 @@ $ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [-
 # TODO
 
   - Add tests for service & Connectors
-  - Create a service
-  - Do some real software engineering shit over here.
+  - Create a service for SHETI
   - Add connegtor for GitHub (doing)
   - Add connector for Jira
   - Move HipchatPublisher to a module
