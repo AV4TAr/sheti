@@ -1,5 +1,4 @@
 <?php
-use GithubConnector\GithubService;
 return array(
     'show-me-the-issue' => [
         'service-mapper' => [
