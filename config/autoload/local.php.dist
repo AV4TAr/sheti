@@ -10,31 +10,52 @@
  * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
  * credentials from accidentally being committed into version control.
  */
-
-return array(
+return [
     'show-me-the-issue' => array(
         'hipchat' => [
-            'api-token' => 'HIPCHAT TOKEN'
+            'api-token' => 'HIPCHAT-TOKEN'
         ],
         'repo-mapping' => [
+            /*
             [
-                'repo-type' => 'bitbucket',
-                'repo' => 'prj-ourplan-pull',
-                'issue-tracker-link' => 'https://bitbucket.org/caseinc/lepatner-arazoo/issues?status=new&status=open',
-                'hipchat-room' => '573590',
-                'skip' => false
-            ]
+                'repo-type' => 'github',
+                'repo' => 'sheti',
+                'issue-tracker-link' => 'https://github.com/AV4TAr/sheti/issues',
+                'hipchat-room' => '1234567',
+                'skip' => false,
+            ],
+            */
         ]
     ),
     'bitbucket-connector' => [
-        'account-name' => 'caseinc',
+        'account-name' => 'ACCOUNT-NAME',
         'oauth' => [
             'oauth_consumer_key' => 'OAUTH-KEY',
             'oauth_consumer_secret' => 'OAUTH-SECRET'
         ],
+        /**
+         * What issues to filter
+         */
         'issue-filters' => [
             'kind' => 'bug',
             'status' => 'new'
         ]
+    ],
+    'github-connector' => [
+        'account-name' => 'ACCOUNT-NAME',
+        'oauth' => [
+            // 'oauth_consumer_key' => 'CONSUMER-KEY',
+            // 'oauth_consumer_secret' => 'CONSUMER-SECRET'
+        ],
+        'user_connect' => [
+            'username' => 'USERNAME',
+            'password' => 'PASSWORD'
+        ],
+        /**
+         * What issues to filter
+         */
+        'issue-filters' => [
+            'state' => 'open'
+        ]
     ]
-);
+];
