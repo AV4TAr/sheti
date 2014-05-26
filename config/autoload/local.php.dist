@@ -19,23 +19,31 @@ return [
             /*
             [
                 'repo-type' => 'github',
+                'account-name' => 'av4tar',
                 'repo' => 'sheti',
                 'issue-tracker-link' => 'https://github.com/AV4TAr/sheti/issues',
                 'hipchat-room' => '1234567',
                 'skip' => false, //it will be skipped if true
+                'issue-filters' => [
+                    'state' => 'open'
+                ],
             ],
             [
                 'repo-type' => 'bitbucket',
+                'account-name' => 'av4tar',
                 'repo' => 'sheti',
                 'issue-tracker-link' => 'https://bitbucket.org/AV4TAr/sheti/issues',
                 'hipchat-room' => '1234567',
                 'skip' => false, //it will be skipped if true
+                'issue-filters' => [
+                    'kind' => 'bug',
+                    'status' => 'new'
+                ]
             ],
             */
         ]
     ),
     'bitbucket-connector' => [
-        'account-name' => 'ACCOUNT-NAME',
         'oauth' => [
             'oauth_consumer_key' => 'OAUTH-KEY',
             'oauth_consumer_secret' => 'OAUTH-SECRET'
@@ -49,7 +57,6 @@ return [
         ]
     ],
     'github-connector' => [
-        'account-name' => 'ACCOUNT-NAME',
         'oauth' => [
             // 'oauth_consumer_key' => 'CONSUMER-KEY',
             // 'oauth_consumer_secret' => 'CONSUMER-SECRET'
