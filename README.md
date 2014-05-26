@@ -27,15 +27,33 @@ It's a ZF2 cli app that will connect to repos, get the issues, process them and 
     $ cp /config/autoload/local.php.dist /config/autoload/local.php
     ```
 
-4. Customize /config/autoload/local.php as needed for your environment.
-5. Create
-
-# Configuration
+4. Customize /config/autoload/local.php as needed for your environment. 
+5. Enjoy!!
 
 
 # Usage
 
+See 
+```bash
+➜  show-me-the-issue git:(master) ✗ php public/index.php
+Show Me The Issue v0.1
+
+------------------------------------------------------------------------
+ShowMeTheIssue
+------------------------------------------------------------------------
+
+Posts issues to hipchat room
+  index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]    Process issues.
+
+  --add-image                        Add image when publishing
+  --enable-hipchat                   Publish issues to hipchat
+  --hipchat-room=HIPCHAT_GROUP_ID    Use a default room to post issues, used for debugging
+  --repo=REPOSITORY_ID               Will process only this repository
+  --verbose|-v                       (optional) turn on verbose mode
 ```
+
+
+```bash
 $ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]
 ```
 

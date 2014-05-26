@@ -22,7 +22,14 @@ return [
                 'repo' => 'sheti',
                 'issue-tracker-link' => 'https://github.com/AV4TAr/sheti/issues',
                 'hipchat-room' => '1234567',
-                'skip' => false,
+                'skip' => false, //it will be skipped if true
+            ],
+            [
+                'repo-type' => 'bitbucket',
+                'repo' => 'sheti',
+                'issue-tracker-link' => 'https://bitbucket.org/AV4TAr/sheti/issues',
+                'hipchat-room' => '1234567',
+                'skip' => false, //it will be skipped if true
             ],
             */
         ]
