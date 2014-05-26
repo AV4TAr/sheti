@@ -8,5 +8,5 @@ namespace ShowMeTheIssue\Repo;
  */
 interface RepoInterface
 {
-    public function getIssuesFromRepo($repo, array $filter);
+    public function getIssuesFromRepo($account = null, $repo = null, array $filter = []);
 }

@@ -24,6 +24,11 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
      */
     protected $issueConnector;
 
+    /**
+     * 
+     * @param array $config
+     * @throws \Exception
+     */
     public function __construct(array $config)
     {
         if(!(isset($config['oauth']['oauth_consumer_key']) && $config['oauth']['oauth_consumer_key']!=NULL)){
@@ -44,14 +49,19 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
     /**
      * (non-PHPdoc)
      * @see \ShowMeTheIssue\src\ShowMeTheIssue\Repo\RepoInterface::getIssues()
-     * return ShowMeTheIssue\Entity\Issue[]
+     * @return ShowMeTheIssue\Entity\Issue[]
+     * @todo accept a configuration object.
      */
-    public function getIssuesFromRepo($repo, array $filter = null)
+    public function getIssuesFromRepo($account = null, $repo = null, array $filter = null)
     {
-        if($filter == null){
-            $filter = $this->config['issue-filters'];
+        if($repo == null){
+            throw new \InvalidArgumentException('No repo parameter specified.');
         }
-        $issues = json_decode($this->issueConnector->all($this->config['account-name'], $repo, $filter)->getContent(), true);
+        
+        if($account == null){
+            throw new \InvalidArgumentException('No account parameter specified for this repo: '.$repo);
+        }
+        $issues = json_decode($this->issueConnector->all($account, $repo, $filter)->getContent(), true);
         $issueList = [];
         $issueHydrator = new IssueHydrator();
         foreach($issues['issues'] as $issue){

@@ -29,11 +29,11 @@ class GithubService implements RepoInterface
      * @param array $config
      * @param ServiceLocatorInterface $serviceLocator $serviceLocator
      * @throws \Exception
+     * @todo Handle exceptions as it should!!! GO FOR IT!
      */
-    public function __construct(array $config, ServiceLocatorInterface $serviceLocator)
+    public function __construct(array $config)
     {
         $this->config = $config;
-        $this->setServiceLocator($serviceLocator);
         
         $client = new \Github\HttpClient\CachedHttpClient();
         $client->setCache(new \Github\HttpClient\Cache\FilesystemCache('./data/cache/github-api-cache'));
@@ -48,9 +48,9 @@ class GithubService implements RepoInterface
         }
         try {
             $this->client = new \Github\Client($client);
-            $this->getIssuesFromRepo();
         } catch (\Github\Exception\InvalidArgumentException $e) {
-            die("Argumentos invalidos para la conexion");
+            throw $e;
+            //die("Argumentos invalidos para la conexion");
         }
         
     }
@@ -63,9 +63,17 @@ class GithubService implements RepoInterface
      * @todo inject hydrator
      * @todo inject IssueService
      */
-    public function getIssuesFromRepo($repo = 'bim-analytics-backend', array $filter = ['state' => 'open'])
+    public function getIssuesFromRepo($account = null, $repo=null,  array $filter = [])
     {
-        $issues = $this->client->api('issue')->all($this->config['account-name'], $repo, $filter);
+        if($repo == null){
+            throw new \InvalidArgumentException('No repo parameter specified.');
+        }
+        
+        if($account == null){
+            throw new \InvalidArgumentException('No account parameter specified for this repo: '.$repo);
+        }
+        
+        $issues = $this->client->api('issue')->all($account, $repo, $filter);
         $issueList = [];
         $issueHydrator = new IssueHydrator();
         foreach ($issues as $issue) {

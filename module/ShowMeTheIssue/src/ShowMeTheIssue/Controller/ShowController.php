@@ -23,7 +23,7 @@ class ShowController extends AbstractActionController
         $filterRepo     = $request->getParam('repo',false);
 
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
-        
+                
         foreach ($config['repo-mapping'] as $data) {
             try {
                 if (isset($data['skip']) && $data['skip'] == true) {
@@ -43,7 +43,8 @@ class ShowController extends AbstractActionController
                 
                 if($verbose){ echo '>>>> Getting issues from '.ucfirst($data['repo-type']).' - '.$data['repo'].PHP_EOL; }
                 
-                $issue_response = $repoService->getIssuesFromRepo($data['repo']);
+                
+                $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
                 
                 $issue_msg = '<b>issue report from code repository: '.$data['repo'].'</b><br/>';
                 if($verbose){ echo '   REPO: '.$data['repo'].PHP_EOL; }
@@ -66,6 +67,12 @@ class ShowController extends AbstractActionController
                     }
                 }
                 
+                if(isset($data['skip_if_no_issue']) && $data['skip_if_no_issue'] == true){
+                    if($verbose){ echo '       ** Skipping hipchat'.PHP_EOL; }
+                    continue;
+                }
+                if($verbose){ echo '       ** Publishing to hipchat room: '.$data['hipchat-room'].PHP_EOL; }
+                
                 //publish.pre event
                 if ($enableHipchat) {
                     $hc = new HipChat($config['hipchat']['api-token']);
@@ -79,7 +86,8 @@ class ShowController extends AbstractActionController
                 //publish.post event
                 
             } catch (\Exception $e){
-                echo $e->getMessage();
+                throw $e;
+                echo 'ERROR: '.$e->getMessage().PHP_EOL;
             }
         }
         
