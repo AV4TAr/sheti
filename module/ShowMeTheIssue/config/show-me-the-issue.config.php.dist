@@ -1,15 +1,5 @@
 <?php
 return [
-    'bitbucket' => [
-        'account-name' => 'caseinc',
-        'oauth' => [
-            'oauth_consumer_key' => '',
-            'oauth_consumer_secret' => ''
-        ]
-    ],
-    'hipchat' => [
-        'api-token' => ''
-    ],
     'repo-mapping' => [
         [
             'repo-type' => 'bitbucket',
@@ -18,6 +8,6 @@ return [
             'hipchat-room' => 'HIPCHAT_ROOM_ID',
             'skip' => false // if true will not be processed
         ],
-    ]
+    ],
 ];
             
