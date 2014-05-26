@@ -43,19 +43,16 @@ ShowMeTheIssue
 ------------------------------------------------------------------------
 
 Posts issues to hipchat room
-  index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]    Process issues.
+  index.php issues process [--enable-hipchat] [--hipchat-room=] [--repo=]
+                           [--verbose|-v] [--add-image]  Process issues.
 
-  --add-image                        Add image when publishing
   --enable-hipchat                   Publish issues to hipchat
   --hipchat-room=HIPCHAT_GROUP_ID    Use a default room to post issues, used for debugging
   --repo=REPOSITORY_ID               Will process only this repository
   --verbose|-v                       (optional) turn on verbose mode
+  --add-image                        Add image when publishing  
 ```
 
-
-```bash
-$ index.php issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]
-```
 
 # TODO
 
