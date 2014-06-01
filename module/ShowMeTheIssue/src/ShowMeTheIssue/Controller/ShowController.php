@@ -71,10 +71,11 @@ class ShowController extends AbstractActionController
                     if($verbose){ echo '       ** Skipping hipchat'.PHP_EOL; }
                     continue;
                 }
-                if($verbose){ echo '       ** Publishing to hipchat room: '.$data['hipchat-room'].PHP_EOL; }
+                
                 
                 //publish.pre event
                 if ($enableHipchat) {
+                    if($verbose){ echo '       ** Publishing to hipchat room: '.$data['hipchat-room'].PHP_EOL; }
                     $hc = new HipChat($config['hipchat']['api-token']);
                     $hipchatRoom = $data['hipchat-room'];
                     if ($defaultRoom) {
