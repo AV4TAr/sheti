@@ -4,9 +4,9 @@ namespace ShowMeTheIssue\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Request;
 use HipChat\HipChat;
-use ShowMeTheIssue\Event\IssuesGetEvent;
 use ShowMeTheIssue\Event\IssuesGetEventPre;
 use ShowMeTheIssue\Event\IssuesGetEventPost;
+use ShowMeTheIssue\Collection\IssueCollection;
 
 class ShowController extends AbstractActionController
 {
@@ -65,10 +65,11 @@ class ShowController extends AbstractActionController
                 
                 $result = $this->getEventManager()->trigger($issuesGetEventPre, function ($r)
                 {
-                    return is_array($r);
+                    return ($r instanceof IssueCollection);
                 });
                 if ($result->stopped()) {
                     $issue_response = $result->last();
+                    
                 } else {
                     $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
                     // evento post

@@ -5,6 +5,7 @@ use ShowMeTheIssue\Repo\RepoInterface;
 use BitbucketConnector\IssueHydrator;
 use ShowMeTheIssue\Entity\Issue;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use ShowMeTheIssue\Collection\IssueCollection;
 
 /**
  * Connects with Github
@@ -74,7 +75,7 @@ class GithubService implements RepoInterface
         }
         
         $issues = $this->client->api('issue')->all($account, $repo, $filter);
-        $issueList = [];
+        $issueList = new IssueCollection();
         $issueHydrator = new IssueHydrator();
         foreach ($issues as $issue) {
             $issueObject = new Issue();

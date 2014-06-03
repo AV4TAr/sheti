@@ -6,6 +6,7 @@ use Bitbucket\API\Repositories\Issues;
 use Bitbucket\API\Http\Listener\OAuthListener;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ShowMeTheIssue\Entity\Issue;
+use ShowMeTheIssue\Collection\IssueCollection;
 
 /**
  * Connects with Bitbucket
@@ -62,7 +63,7 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
             throw new \InvalidArgumentException('No account parameter specified for this repo: '.$repo);
         }
         $issues = json_decode($this->issueConnector->all($account, $repo, $filter)->getContent(), true);
-        $issueList = [];
+        $issueList = new IssueCollection();
         $issueHydrator = new IssueHydrator();
         foreach($issues['issues'] as $issue){
            $issueObject = new Issue();
