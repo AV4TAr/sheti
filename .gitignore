@@ -9,3 +9,5 @@ nbproject
 composer.lock
 vendor/bin
 vendor
+data/logs
+data/cache
