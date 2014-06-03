@@ -4,7 +4,7 @@
     "license": "GPL",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "zendframework/zendframework": "2.3.*",
         "gentle/bitbucket-api": "dev-master",
         "hipchat/hipchat-php": ">=1.0.0",
