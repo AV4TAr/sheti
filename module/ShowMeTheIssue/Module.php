@@ -71,5 +71,12 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $sm = $e->getApplication()->getServiceManager();
+        $shem = $sm->get('SharedEventManager');
+        
+        $listener = $sm->get('IssueCacheListener');
+        
+        $listener->attachShared($shem);
     }
 }
