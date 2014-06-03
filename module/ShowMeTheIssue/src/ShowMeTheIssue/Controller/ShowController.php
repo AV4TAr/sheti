@@ -6,6 +6,7 @@ use Zend\Console\Request;
 use HipChat\HipChat;
 use ShowMeTheIssue\Event\IssuesGetEvent;
 use ShowMeTheIssue\Event\IssuesGetEventPre;
+use ShowMeTheIssue\Event\IssuesGetEventPost;
 
 class ShowController extends AbstractActionController
 {
@@ -56,13 +57,13 @@ class ShowController extends AbstractActionController
                 }
                     
                     // evento pre
-                $issuesGetEvent = (new IssuesGetEventPre())->setTarget($this)->setParams([
+                $issuesGetEventPre = (new IssuesGetEventPre())->setTarget($this)->setParams([
                     'account-name' => $data['account-name'],
                     'repo' => $data['repo'],
                     'issue-filters' => $data['issue-filters']
                 ]);
                 
-                $result = $this->getEventManager()->trigger($issuesGetEvent, function ($r)
+                $result = $this->getEventManager()->trigger($issuesGetEventPre, function ($r)
                 {
                     return is_array($r);
                 });
@@ -71,12 +72,13 @@ class ShowController extends AbstractActionController
                 } else {
                     $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
                     // evento post
-                    $result = $this->getEventManager()->trigger('ISSUES_GET.post', $this, [
+                    $issuesGetEventPost = (new IssuesGetEventPost())->setTarget($this)->setParams([
                         'issues' => $issue_response,
                         'account-name' => $data['account-name'],
                         'repo' => $data['repo'],
                         'issue-filters' => $data['issue-filters']
                     ]);
+                    $result = $this->getEventManager()->trigger($issuesGetEventPost);
                 }
                 
                 $issue_msg = '<b>issue report from code repository: ' . $data['repo'] . '</b><br/>';
