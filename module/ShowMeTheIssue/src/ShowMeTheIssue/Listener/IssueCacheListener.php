@@ -41,7 +41,6 @@ class IssueCacheListener implements SharedListenerAggregateInterface
         $item = $this->cache->getItem($key);
         if ($item) {
             $this->log->debug('ISSUES_GET.pre - cache hit');
-            $e->stopPropagation();
             return $item;
         } else {
             $this->log->debug('ISSUES_GET.pre - cache miss');
