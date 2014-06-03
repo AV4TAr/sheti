@@ -1,5 +1,4 @@
 <?php
-use ShowMeTheIssue\Controller\ShowController;
 return array(
     'show-me-the-issue' => [
         'hipchat' => [
@@ -18,11 +17,7 @@ return array(
     'controllers' => [
         'invokables' => [],
         'factories' => [
-            'ShowMeTheIssue\Controller\Show' => function ($cm)
-            {
-                $log = $cm->getServiceLocator()->get('Log\Issues');
-                return new ShowController($log);
-            }
+            'ShowMeTheIssue\Controller\Show' => 'ShowMeTheIssue\Controller\ShowControllerFactory'
         ]
     ],
     
