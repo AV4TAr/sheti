@@ -4,7 +4,7 @@ return array(
         'hipchat' => [
             'api-token' => ''
         ],
-        'repo-mapping' =>         // []
+        'repo-mapping' => 
         [
             'repo-type' => 'bitbucket',
             'repo' => 'lepatner-arazoo',
@@ -38,15 +38,10 @@ return array(
     ],
     'service_manager' => [
         'factories' => [
-            'IssueCacheListener' => function($sm){
-                $cache = $sm->get('Cache\Issues');
-                $log   = $sm->get('Log\Issues');
-                return new \ShowMeTheIssue\Listener\IssueCacheListener($cache, $log);
-            }
+            'IssueCacheListener' => 'ShowMeTheIssue\Listener\IssueCacheListenerFactory'
         ],
         'invokables' => [
             'ShowMeTheIssue\Issue' => 'ShowMeTheIssue\Entity\Issue',
-            //'ShowMeTheIssue\Listener\IssueCacheListener' => 'ShowMeTheIssue\Listener\IssueCacheListener'
         ],
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
