@@ -4,12 +4,14 @@ namespace ShowMeTheIssue\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Request;
 use HipChat\HipChat;
+use ShowMeTheIssue\Event\IssuesGetEvent;
+use ShowMeTheIssue\Event\IssuesGetEventPre;
 
 class ShowController extends AbstractActionController
 {
 
     private $log;
-    
+
     public function __construct($log)
     {
         $this->log = $log;
@@ -52,13 +54,15 @@ class ShowController extends AbstractActionController
                 if ($verbose) {
                     echo '>>>> Getting issues from ' . ucfirst($data['repo-type']) . ' - ' . $data['repo'] . PHP_EOL;
                 }
-                
-                // evento pre
-                $result = $this->getEventManager()->trigger('ISSUES_GET.pre', $this, [
+                    
+                    // evento pre
+                $issuesGetEvent = (new IssuesGetEventPre())->setTarget($this)->setParams([
                     'account-name' => $data['account-name'],
                     'repo' => $data['repo'],
                     'issue-filters' => $data['issue-filters']
-                ], function ($r)
+                ]);
+                
+                $result = $this->getEventManager()->trigger($issuesGetEvent, function ($r)
                 {
                     return is_array($r);
                 });

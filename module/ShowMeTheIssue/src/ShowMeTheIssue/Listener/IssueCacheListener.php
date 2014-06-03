@@ -30,7 +30,8 @@ class IssueCacheListener implements SharedListenerAggregateInterface
     public function attachShared(SharedEventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('ShowMeTheIssue\Controller\ShowController', 'ISSUES_GET.pre', [$this,'onIssueGetPre'], 500);
-        $this->listeners[] = $events->attach('ShowMeTheIssue\Controller\ShowController', 'ISSUES_GET.post', [$this,'onIssueGetPost'], 500);
+        
+        $this->listeners[] = $events->attach('ShowMeTheIssue\Controller\ShowController', 'ISSUES_GET.pre', [$this,'onIssueGetPre'], 500);
     }
 
     public function onIssueGetPre(EventInterface $e)
