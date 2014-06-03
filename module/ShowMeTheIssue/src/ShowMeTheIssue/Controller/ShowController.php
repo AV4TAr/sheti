@@ -4,44 +4,15 @@ namespace ShowMeTheIssue\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Request;
 use HipChat\HipChat;
-use Zend\Cache\StorageFactory;
-use Zend\EventManager\Event;
 
 class ShowController extends AbstractActionController
 {
 
-    private $cache;
-
-    public function __construct()
+    private $log;
+    
+    public function __construct($log)
     {
-        $cache = StorageFactory::adapterFactory('filesystem');
-        $cache->setOptions([
-            'cache_dir' => 'data/cache'
-        ]);
-        $plugin = StorageFactory::pluginFactory('exception_handler', array(
-            'throw_exceptions' => false
-        ));
-        $cache->addPlugin($plugin);
-        
-        
-        $this->getEventManager()->attach('ISSUES_GET.pre', function (Event $e) use($cache)
-        {
-            $config = $e->getParams();
-            $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' . implode('-', $config['issue-filters']);
-            
-            $item = $cache->getItem($key);
-            if ($item) {
-                $e->stopPropagation();
-                return unserialize($item);
-            } 
-        });
-        
-        $this->getEventManager()->attach('ISSUES_GET.post', function (Event $e) use($cache)
-        {
-            $config = $e->getParams();
-            $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' . implode('-', $config['issue-filters']);
-            $cache->setItem($key, serialize($config['issues']));
-        });
+        $this->log = $log;
     }
 
     function processAction()
@@ -95,14 +66,14 @@ class ShowController extends AbstractActionController
                     $issue_response = $result->last();
                 } else {
                     $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
+                    // evento post
+                    $result = $this->getEventManager()->trigger('ISSUES_GET.post', $this, [
+                        'issues' => $issue_response,
+                        'account-name' => $data['account-name'],
+                        'repo' => $data['repo'],
+                        'issue-filters' => $data['issue-filters']
+                    ]);
                 }
-                // evento post
-                $result = $this->getEventManager()->trigger('ISSUES_GET.post', $this, [
-                    'issues' => $issue_response,
-                    'account-name' => $data['account-name'],
-                    'repo' => $data['repo'],
-                    'issue-filters' => $data['issue-filters']
-                ]);
                 
                 $issue_msg = '<b>issue report from code repository: ' . $data['repo'] . '</b><br/>';
                 if ($verbose) {

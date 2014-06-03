@@ -1,6 +1,7 @@
 <?php
+use ShowMeTheIssue\Controller\ShowController;
 return array(
-    'show-me-the-issue' => array(
+    'show-me-the-issue' => [
         'hipchat' => [
             'api-token' => ''
         ],
@@ -12,32 +13,45 @@ return array(
             'hipchat-room' => '573590',
             'skip' => true
         ]
-    ),
+    ],
     
-    'controllers' => array(
-        'invokables' => array(
-            'ShowMeTheIssue\Controller\Show' => 'ShowMeTheIssue\Controller\ShowController'
-        )
-    ),
+    'controllers' => [
+        'invokables' => [],
+        'factories' => [
+            'ShowMeTheIssue\Controller\Show' => function ($cm)
+            {
+                $log = $cm->getServiceLocator()->get('Log\Issues');
+                return new ShowController($log);
+            }
+        ]
+    ],
     
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'get-issues' => array(
-                    'options' => array(
+    'console' => [
+        'router' => [
+            'routes' => [
+                'get-issues' => [
+                    'options' => [
                         'route' => 'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--repo=] [--verbose|-v]',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'ShowMeTheIssue\Controller\Show',
                             'action' => 'process'
-                        )
-                    )
-                )
-            )
-        )
-    ),
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'service_manager' => [
+        'factories' => [
+            'IssueCacheListener' => function($sm){
+                $cache = $sm->get('Cache\Issues');
+                $log   = $sm->get('Log\Issues');
+                return new \ShowMeTheIssue\Listener\IssueCacheListener($cache, $log);
+            }
+        ],
         'invokables' => [
-            'ShowMeTheIssue\Issue' => 'ShowMeTheIssue\Entity\Issue'
+            'ShowMeTheIssue\Issue' => 'ShowMeTheIssue\Entity\Issue',
+            //'ShowMeTheIssue\Listener\IssueCacheListener' => 'ShowMeTheIssue\Listener\IssueCacheListener'
         ],
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -49,5 +63,34 @@ return array(
         'shared' => [
             'ShowMeTheIssue\Issue' => FALSE
         ]
-    ]
-);
+    ],
+    'caches' => [
+        'Cache\Issues' => [
+            'adapter' => 'filesystem',
+            'options' => [
+                'ttl' => 1800,
+                'cache_dir' => 'data/cache',
+            ],
+            'plugins' => array(
+                'exception_handler' => array(
+                    'throw_exceptions' => false
+                ),
+                'serializer',
+            )
+        ],
+     ],
+    'log' => [
+        'Log\Issues' => [
+            'writers' => [
+                [
+                    'name' => 'stream',
+                    'priority' => 1000,
+                    'options' => [
+                        'stream' => 'data/logs/issues.log',
+                    ],
+                ],
+            ],
+        ],
+    ],
+)
+;
