@@ -60,7 +60,7 @@ Posts issues to hipchat room
 
   - Add tests for service & Connectors
   - Create a service for SHETI
-  - Add connegtor for GitHub (doing)
+  - Add connegtor for GitHub (done)
   - Add connector for Jira
   - Move HipchatPublisher to a module
   - Add Publisher for IRC
