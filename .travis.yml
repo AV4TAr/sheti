@@ -2,7 +2,7 @@ language: php
 
 before_script:
   - composer self-update
-  - php composer.phar install --dev
+  - composer install -vv
 
 script:
   - ./vendor/bin/phpcs module/
