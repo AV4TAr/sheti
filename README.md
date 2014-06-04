@@ -1,5 +1,7 @@
 # SHow mE the Issues
 
+[![Build Status](https://travis-ci.org/AV4TAr/show-me-the-issues.svg?branch=master)](https://travis-ci.org/AV4TAr/show-me-the-issues)
+
 SHETI : pronounced /ˈʃeti/
 
 The prupose of this app is to publish issues from different code repositories (bitbucket and github are currently supported) into hipchat rooms.
