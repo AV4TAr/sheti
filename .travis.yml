@@ -5,7 +5,7 @@ before_script:
   - composer install -vv
 
 script:
-  - ./vendor/bin/phpcs module/
+  - ./vendor/bin/php-cs-fixer -v fix module --dry-run --config-file ./.php_cs
 
 php:
   - 5.4
