@@ -9,5 +9,10 @@
         "gentle/bitbucket-api": "dev-master",
         "hipchat/hipchat-php": ">=1.0.0",
         "knplabs/github-api": "*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*",
+        "fabpot/php-cs-fixer": "*@dev",
+        "phpunit/PHPUnit": "3.7.*"
     }
 }
