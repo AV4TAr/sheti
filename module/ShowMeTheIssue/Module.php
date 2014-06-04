@@ -33,7 +33,7 @@ class Module implements AutoloaderProviderInterface
             ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-		    // if we're in a namespace deeper than one level we need to fix the \ in the path
+            // if we're in a namespace deeper than one level we need to fix the \ in the path
                     __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
                 ),
             ),
@@ -48,11 +48,13 @@ class Module implements AutoloaderProviderInterface
         );
     }
 
-    public function getConsoleBanner(Console $console){
+    public function getConsoleBanner(Console $console)
+    {
         return "Show Me The Issue v0.1";
     }
-    
-    public function getConsoleUsage(Console $console){
+
+    public function getConsoleUsage(Console $console)
+    {
         return array(
             'Posts issues to hipchat room',
             'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'    => 'Process issues.',
@@ -63,7 +65,7 @@ class Module implements AutoloaderProviderInterface
             array('--verbose|-v', '(optional) turn on verbose mode')
         );
     }
-    
+
     public function onBootstrap(MvcEvent $e)
     {
         // You may not need to do this if you're doing it elsewhere in your
@@ -71,12 +73,12 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
+
         $sm = $e->getApplication()->getServiceManager();
         $shem = $sm->get('SharedEventManager');
-        
+
         $listener = $sm->get('IssueCacheListener');
-        
+
         $listener->attachShared($shem);
     }
 }

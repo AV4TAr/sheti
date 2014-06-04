@@ -19,28 +19,28 @@ class ShowController extends AbstractActionController
     }
 
     /**
-     * 
+     *
      * @throws \RuntimeException
      * @throws Exception
      * @return boolean|string
      * @todo Usar console para tirar texto en vez de echo.
      */
-    function processAction()
+    public function processAction()
     {
         $request = $this->getRequest();
-        
+
         if (! $request instanceof Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
-        
+
         $enableHipchat = $request->getParam('enable-hipchat');
         $addImage = $request->getParam('add-image', false);
         $defaultRoom = $request->getParam('hipchat-room');
         $verbose = $request->getParam('verbose');
         $filterRepo = $request->getParam('repo', false);
-        
+
         $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
-        
+
         foreach ($config['repo-mapping'] as $data) {
             try {
                 if (isset($data['skip']) && $data['skip'] == true) {
@@ -49,7 +49,7 @@ class ShowController extends AbstractActionController
                 if ($filterRepo !== false && $filterRepo !== $data['repo']) {
                     continue;
                 }
-                
+
                 if ($this->getServiceLocator()->has($config['service-mapper'][$data['repo-type']])) {
                     $repoService = $this->getServiceLocator()->get($config['service-mapper'][$data['repo-type']]);
                 } else {
@@ -58,25 +58,24 @@ class ShowController extends AbstractActionController
                     }
                     continue;
                 }
-                
+
                 if ($verbose) {
                     echo '>>>> Getting issues from ' . ucfirst($data['repo-type']) . ' - ' . $data['repo'] . PHP_EOL;
                 }
-                    
+
                     // evento pre
                 $issuesGetEventPre = (new IssuesGetEventPre())->setTarget($this)->setParams([
                     'account-name' => $data['account-name'],
                     'repo' => $data['repo'],
                     'issue-filters' => $data['issue-filters']
                 ]);
-                
-                $result = $this->getEventManager()->trigger($issuesGetEventPre, function ($r)
-                {
+
+                $result = $this->getEventManager()->trigger($issuesGetEventPre, function ($r) {
                     return ($r instanceof IssueCollection);
                 });
                 if ($result->stopped()) {
                     $issue_response = $result->last();
-                    
+
                 } else {
                     $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
                     // evento post
@@ -88,7 +87,7 @@ class ShowController extends AbstractActionController
                     ]);
                     $result = $this->getEventManager()->trigger($issuesGetEventPost);
                 }
-                
+
                 $issue_msg = '<b>issue report from code repository: ' . $data['repo'] . '</b><br/>';
                 if ($verbose) {
                     echo '   REPO: ' . $data['repo'] . PHP_EOL;
@@ -115,14 +114,14 @@ class ShowController extends AbstractActionController
                         $issue_msg .= '<img src="' . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)] . '"/>';
                     }
                 }
-                
+
                 if (isset($data['skip_if_no_issue']) && $data['skip_if_no_issue'] == true) {
                     if ($verbose) {
                         echo '       ** Skipping hipchat' . PHP_EOL;
                     }
                     continue;
                 }
-                
+
                 // publish.pre event
                 if ($enableHipchat) {
                     if ($verbose) {
@@ -144,7 +143,7 @@ class ShowController extends AbstractActionController
                 echo 'ERROR: ' . $e->getMessage() . PHP_EOL;
             }
         }
-        
+
         return '--- DONE ---' . PHP_EOL;
     }
 }

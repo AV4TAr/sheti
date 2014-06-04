@@ -5,7 +5,7 @@ use Zend\EventManager\Event;
 /**
  * Fired after issues where get from the connector
  * @author diego
- *        
+ *
  */
 class IssuesGetEventPost extends Event
 {

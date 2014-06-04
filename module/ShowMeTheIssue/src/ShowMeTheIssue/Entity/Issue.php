@@ -7,7 +7,7 @@ use Zend\Stdlib\JsonSerializable;
 /**
  *
  * @author diego
- *        
+ *
  */
 class Issue implements ArraySerializableInterface, JsonSerializable
 {
@@ -29,18 +29,18 @@ class Issue implements ArraySerializableInterface, JsonSerializable
     public $priority;
 
     public $status;
-    
+
     /*
      * (non-PHPdoc) @see \Zend\Stdlib\ArraySerializableInterface::exchangeArray()
      */
     public function exchangeArray(array $array)
     {
         $vars =  get_object_vars($this);
-        foreach($vars as $var => $v){
+        foreach ($vars as $var => $v) {
             $this->{$var} = $array[$var];
         }
     }
-    
+
     /*
      * (non-PHPdoc) @see \Zend\Stdlib\ArraySerializableInterface::getArrayCopy()
      */
@@ -51,7 +51,7 @@ class Issue implements ArraySerializableInterface, JsonSerializable
 
     public function jsonSerialize()
     {
-    	return $this->getArrayCopy();
+        return $this->getArrayCopy();
     }
 
     public function __toString()

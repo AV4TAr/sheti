@@ -6,7 +6,7 @@ use Zend\ServiceManager\FactoryInterface;
 /**
  *
  * @author diego
- *        
+ *
  */
 class ShowControllerFactory implements FactoryInterface
 {
@@ -16,6 +16,7 @@ class ShowControllerFactory implements FactoryInterface
     public function createService(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
     {
         $log = $serviceLocator->getServiceLocator()->get('Log\Issues');
+
         return new ShowController($log);
     }
 }

@@ -10,9 +10,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class GithubServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator){
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
         $config = $serviceLocator->get('config');
         $service = new GithubService($config['github-connector']);
+
         return $service;
     }
 }
