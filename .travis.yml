@@ -8,7 +8,7 @@ php:
   - composer install --dev --prefer-source
 
 script:
-  - ./vendor/bin/php-cs -h
+  - ./vendor/bin/phpcs module/
 
 notifications:
  email: true
