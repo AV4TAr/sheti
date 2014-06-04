@@ -18,6 +18,13 @@ class ShowController extends AbstractActionController
         $this->log = $log;
     }
 
+    /**
+     * 
+     * @throws \RuntimeException
+     * @throws Exception
+     * @return boolean|string
+     * @todo Usar console para tirar texto en vez de echo.
+     */
     function processAction()
     {
         $request = $this->getRequest();
