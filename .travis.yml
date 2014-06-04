@@ -8,5 +8,5 @@ script:
   - ./vendor/bin/phpcs module/
 
 php:
-  - 5.3
+  - 5.4
   - 5.4
