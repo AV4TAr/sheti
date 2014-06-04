@@ -7,7 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  *
  * @author diego
- *        
+ *
  */
 class BitbucketServiceFactory implements FactoryInterface
 {
@@ -15,6 +15,7 @@ class BitbucketServiceFactory implements FactoryInterface
     {
         $config = $serviceLocator->get('config');
         $service = new BitbucketService($config['bitbucket-connector']);
+
         return $service;
     }
 }

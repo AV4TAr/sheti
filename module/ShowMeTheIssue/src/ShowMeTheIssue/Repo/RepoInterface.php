@@ -4,7 +4,7 @@ namespace ShowMeTheIssue\Repo;
 /**
  *
  * @author diego
- *        
+ *
  */
 interface RepoInterface
 {

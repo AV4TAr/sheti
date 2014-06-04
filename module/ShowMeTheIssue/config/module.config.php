@@ -4,7 +4,7 @@ return array(
         'hipchat' => [
             'api-token' => ''
         ],
-        'repo-mapping' => 
+        'repo-mapping' =>
         [
             'repo-type' => 'bitbucket',
             'repo' => 'lepatner-arazoo',
@@ -13,14 +13,14 @@ return array(
             'skip' => true
         ]
     ],
-    
+
     'controllers' => [
         'invokables' => [],
         'factories' => [
             'ShowMeTheIssue\Controller\Show' => 'ShowMeTheIssue\Controller\ShowControllerFactory'
         ]
     ],
-    
+
     'console' => [
         'router' => [
             'routes' => [

@@ -17,7 +17,7 @@ return [
             'http://media.tumblr.com/7ea55f781ddbe9827e1c32d071604bba/tumblr_inline_n1h2a9LSXC1raprkq.gif',
             'http://media.tumblr.com/6930c27018b33362d7a93d1b2cf1b772/tumblr_inline_n0e0fwku0g1raprkq.gif',
             'http://i.imgur.com/YLS1ufH.gif',
-            
+
         ],
         'yes-issue-images' => [
             'http://i.imgur.com/jLUAQuo.gif',
@@ -41,7 +41,7 @@ return [
             'http://thecodinglove.com/post/84503692011/when-the-demo-does-not-go-as-expected',
             'http://i.imgur.com/rDSUQ2U.gif',
             'http://media.tumblr.com/c41f651322defdb78ab09b1fd86d310c/tumblr_inline_n0e0qcRAIK1raprkq.gif',
-            
+
         ]
     ]
 ];

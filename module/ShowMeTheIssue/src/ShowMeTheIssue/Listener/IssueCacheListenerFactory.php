@@ -6,7 +6,7 @@ use Zend\ServiceManager\FactoryInterface;
 /**
  *
  * @author diego
- *        
+ *
  */
 class IssueCacheListenerFactory implements FactoryInterface
 {
@@ -14,6 +14,7 @@ class IssueCacheListenerFactory implements FactoryInterface
     {
         $cache = $serviceLocator->get('Cache\Issues');
         $log   = $serviceLocator->get('Log\Issues');
+
         return new \ShowMeTheIssue\Listener\IssueCacheListener($cache, $log);
     }
 }

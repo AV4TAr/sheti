@@ -16,13 +16,13 @@ return [
             'kind' => 'bug'
         ]
     ],
-    
+
     'service_manager' => [
         'factories' => [
             'BitbucketConnector\BitbucketService' => 'BitbucketConnector\BitbucketServiceFactory'
         ],
         'aliases' => [
-           'BitbucketService' => 'BitbucketConnector\BitbucketService', 
+           'BitbucketService' => 'BitbucketConnector\BitbucketService',
         ]
     ]
 ];

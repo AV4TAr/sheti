@@ -26,26 +26,25 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
     protected $issueConnector;
 
     /**
-     * 
-     * @param array $config
+     *
+     * @param  array      $config
      * @throws \Exception
      */
     public function __construct(array $config)
     {
-        if(!(isset($config['oauth']['oauth_consumer_key']) && $config['oauth']['oauth_consumer_key']!=NULL)){
+        if (!(isset($config['oauth']['oauth_consumer_key']) && $config['oauth']['oauth_consumer_key']!=NULL)) {
             throw new \Exception('Bitbucket Connector need configuration');
         }
-        if(!(isset($config['oauth']['oauth_consumer_secret']) && $config['oauth']['oauth_consumer_secret']!=NULL)){
+        if (!(isset($config['oauth']['oauth_consumer_secret']) && $config['oauth']['oauth_consumer_secret']!=NULL)) {
             throw new \Exception('Bitbucket Connector need configuration');
         }
-        
+
         $this->config = $config;
         $oauthListener = new OAuthListener($config['oauth']);
         $this->issueConnector = new Issues();
         $this->issueConnector->getClient()->addListener($oauthListener);
-        
-    }
 
+    }
 
     /**
      * (non-PHPdoc)
@@ -55,21 +54,22 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
      */
     public function getIssuesFromRepo($account = null, $repo = null, array $filter = null)
     {
-        if($repo == null){
+        if ($repo == null) {
             throw new \InvalidArgumentException('No repo parameter specified.');
         }
-        
-        if($account == null){
+
+        if ($account == null) {
             throw new \InvalidArgumentException('No account parameter specified for this repo: '.$repo);
         }
         $issues = json_decode($this->issueConnector->all($account, $repo, $filter)->getContent(), true);
         $issueList = new IssueCollection();
         $issueHydrator = new IssueHydrator();
-        foreach($issues['issues'] as $issue){
+        foreach ($issues['issues'] as $issue) {
            $issueObject = new Issue();
            $issueHydrator->hydrate($issue, $issueObject);
            $issueList[] = $issueObject;
         }
+
         return $issueList;
     }
 

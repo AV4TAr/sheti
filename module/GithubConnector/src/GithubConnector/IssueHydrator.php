@@ -5,30 +5,31 @@ use ShowMeTheIssue\Entity\IssueAbstract;
 /**
  *
  * @author diego
- *        
+ *
  */
-class IssueHydrator 
+class IssueHydrator
 {
-	/**
-	 * (non-PHPdoc)
+    /**
+     * (non-PHPdoc)
      * @see \Zend\Stdlib\Hydrator\ArraySerializable::extract()
      * @return array
      */
     public function extract($object)
     {
         $vars =  get_object_vars($object);
+
         return $object->getArrayCopy();
-        
+
     }
 
-	/**
-	 *  (non-PHPdoc)
+    /**
+     *  (non-PHPdoc)
      * @see \Zend\Stdlib\Hydrator\ArraySerializable::hydrate()
      * @param IssueAbstract $object
      */
     public function hydrate(array $data, $object)
     {
-        $object->exchangeArray($data);        
+        $object->exchangeArray($data);
     }
 
 }

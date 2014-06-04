@@ -8,7 +8,7 @@ use Zend\EventManager\SharedEventManagerInterface;
 /**
  *
  * @author diego
- *        
+ *
  */
 class IssueCacheListener implements SharedListenerAggregateInterface
 {
@@ -21,7 +21,7 @@ class IssueCacheListener implements SharedListenerAggregateInterface
 
     protected $cache;
     protected $log;
-    
+
     public function __construct($cache, $log)
     {
         $this->cache = $cache;
@@ -37,10 +37,11 @@ class IssueCacheListener implements SharedListenerAggregateInterface
     {
         $config = $e->getParams();
         $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' . implode('-', $config['issue-filters']);
-        
+
         $item = $this->cache->getItem($key);
         if ($item) {
             $this->log->debug('ISSUES_GET.pre - cache hit');
+
             return $item;
         } else {
             $this->log->debug('ISSUES_GET.pre - cache miss');
