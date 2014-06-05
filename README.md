@@ -58,7 +58,7 @@ Posts issues to hipchat room
 
 # TODO
 
-  - Add tests for service & Connectors (doing)
+  - Add tests for service & Connectors (doing need more)
   - Create a service for SHETI
   - Add connegtor for GitHub (done)
   - Add connector for Jira
