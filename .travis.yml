@@ -6,7 +6,7 @@ before_script:
 
 script:
   - ./vendor/bin/php-cs-fixer -v fix module --dry-run --config-file ./.php_cs
-  - bash ./runtests.sh
+  - ./vendor/bin/phpunit -c ./module/ShowMeTheIssue/test
 
 php:
   - 5.4
