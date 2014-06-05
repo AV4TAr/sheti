@@ -72,7 +72,9 @@ class EntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetArrayCopy()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->entity->exchangeArray($this->initArray);
+        $array = $this->entity->getArrayCopy();
+        $this->assertEquals($this->initArray, $array);
     }
 
     /**
@@ -80,6 +82,8 @@ class EntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testJsonSerialize()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->entity->exchangeArray($this->initArray);
+        $jsonArray = $this->entity->jsonSerialize();
+        $this->assertEquals($this->entity->getArrayCopy(), $jsonArray);
     }
 }
