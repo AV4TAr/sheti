@@ -51,7 +51,7 @@ return array(
             'Issue' => 'ShowMeTheIssue\Issue'
         ],
         'shared' => [
-            'ShowMeTheIssue\Issue' => FALSE
+            'ShowMeTheIssue\Issue' => false
         ]
     ],
     'caches' => [
