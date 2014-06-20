@@ -2,6 +2,7 @@
 namespace BitbucketConnector;
 
 use ShowMeTheIssue\Entity\IssueAbstract;
+
 /**
  *
  * @author diego
@@ -42,5 +43,4 @@ class IssueHydrator
         ];
         $object->exchangeArray($data);
     }
-
 }
