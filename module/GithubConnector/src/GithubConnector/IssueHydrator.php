@@ -2,6 +2,7 @@
 namespace GithubConnector;
 
 use ShowMeTheIssue\Entity\IssueAbstract;
+
 /**
  *
  * @author diego
