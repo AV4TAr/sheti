@@ -40,9 +40,9 @@ class GithubService implements RepoInterface
         $client->setCache(new \Github\HttpClient\Cache\FilesystemCache('./data/cache/github-api-cache'));
 
         if (! empty($config['user_connect']['username']) && ! empty($config['user_connect']['password'])) {
-            $client->authenticate($config['user_connect']['username'], 
-                                  $config['user_connect']['password'], 
-                                  \Github\Client::AUTH_HTTP_PASSWORD);
+            $client->authenticate($config['user_connect']['username'],
+                                $config['user_connect']['password'],
+                                \Github\Client::AUTH_HTTP_PASSWORD);
         } elseif (! empty($config['oauth']['oauth_consumer_key']) && 
                   ! empty($config['oauth']['oauth_consumer_secret'])) {
             echo "no oauth";
