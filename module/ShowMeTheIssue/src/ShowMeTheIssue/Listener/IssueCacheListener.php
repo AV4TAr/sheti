@@ -36,7 +36,8 @@ class IssueCacheListener implements SharedListenerAggregateInterface
     public function onIssueGetPre(EventInterface $e)
     {
         $config = $e->getParams();
-        $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' . implode('-', $config['issue-filters']);
+        $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' 
+            . implode('-', $config['issue-filters']);
 
         $item = $this->cache->getItem($key);
         if ($item) {
@@ -52,7 +53,8 @@ class IssueCacheListener implements SharedListenerAggregateInterface
     {
         $this->log->debug('ISSUES_GET.post - store in cache');
         $config = $e->getParams();
-        $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' . implode('-', $config['issue-filters']);
+        $key = 'issues-' . $config['account-name'] . '-' . $config['repo'] . '-' 
+               . implode('-', $config['issue-filters']);
         $this->cache->setItem($key, $config['issues']);
     }
 
