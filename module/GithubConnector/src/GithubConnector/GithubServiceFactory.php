@@ -3,6 +3,7 @@ namespace GithubConnector;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+
 /**
  *
  * @author diego
