@@ -57,7 +57,8 @@ class Module implements AutoloaderProviderInterface
     {
         return array(
             'Posts issues to hipchat room',
-            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'    => 'Process issues.',
+            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'    
+                => 'Process issues.',
             array('--add-image', 'Add image when publishing'),
             array('--enable-hipchat', 'Publish issues to hipchat'),
             array('--hipchat-room=HIPCHAT_GROUP_ID', 'Use a default room to post issues, used for debugging'),
