@@ -32,5 +32,4 @@ class IssueHydrator
     {
         $object->exchangeArray($data);
     }
-
 }
