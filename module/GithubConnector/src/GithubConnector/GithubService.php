@@ -64,7 +64,7 @@ class GithubService implements RepoInterface
      * @todo inject hydrator
      * @todo inject IssueService
      */
-    public function getIssuesFromRepo($account = null, $repo=null,  array $filter = [])
+    public function getIssuesFromRepo($account = null, $repo = null,  array $filter = [])
     {
         if ($repo == null) {
             throw new \InvalidArgumentException('No repo parameter specified.');
