@@ -59,7 +59,7 @@ class IssueCacheListener implements SharedListenerAggregateInterface
     public function detachShared(SharedEventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $callback) {
-            if ($events->detach($callback)) {
+            if ($events->dettach($callback)) {
                 unset($this->listeners[$index]);
             }
         }
