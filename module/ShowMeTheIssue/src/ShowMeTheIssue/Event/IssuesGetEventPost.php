@@ -2,6 +2,7 @@
 namespace ShowMeTheIssue\Event;
 
 use Zend\EventManager\Event;
+
 /**
  * Fired after issues where get from the connector
  * @author diego

@@ -32,9 +32,7 @@ class Module implements AutoloaderProviderInterface
                 __DIR__ . '/autoload_classmap.php',
             ),
             'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-            // if we're in a namespace deeper than one level we need to fix the \ in the path
-                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
+                'namespaces' => array( __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
                 ),
             ),
         );
@@ -57,7 +55,8 @@ class Module implements AutoloaderProviderInterface
     {
         return array(
             'Posts issues to hipchat room',
-            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'    => 'Process issues.',
+            'issues process [--add-image] [--enable-hipchat] [--hipchat-room=] [--verbose|-v] [--repo=]'
+                => 'Process issues.',
             array('--add-image', 'Add image when publishing'),
             array('--enable-hipchat', 'Publish issues to hipchat'),
             array('--hipchat-room=HIPCHAT_GROUP_ID', 'Use a default room to post issues, used for debugging'),

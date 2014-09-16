@@ -77,7 +77,11 @@ class ShowController extends AbstractActionController
                     $issue_response = $result->last();
 
                 } else {
-                    $issue_response = $repoService->getIssuesFromRepo($data['account-name'], $data['repo'], $data['issue-filters']);
+                    $issue_response = $repoService->getIssuesFromRepo(
+                        $data['account-name'],
+                        $data['repo'],
+                        $data['issue-filters']
+                    );
                     // evento post
                     $issuesGetEventPost = (new IssuesGetEventPost())->setTarget($this)->setParams([
                         'issues' => $issue_response,
@@ -96,7 +100,9 @@ class ShowController extends AbstractActionController
                 if (count($issue_response) == 0) {
                     $issue_msg .= '<b> NO ISSUES!!! Keep it up.</b>';
                     if ($addImage) {
-                        $issue_msg .= '<br/><img src="' . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)] . '"/>';
+                        $issue_msg .= '<br/><img src="'
+                            . $config['no-issue-images'][rand(0, count($config['no-issue-images']) - 1)]
+                            . '"/>';
                     }
                     if ($verbose) {
                         echo '       No issues' . PHP_EOL;
@@ -111,7 +117,9 @@ class ShowController extends AbstractActionController
                         $i ++;
                     }
                     if ($addImage) {
-                        $issue_msg .= '<img src="' . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)] . '"/>';
+                        $issue_msg .= '<img src="'
+                                    . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)]
+                                    . '"/>';
                     }
                 }
 

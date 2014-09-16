@@ -40,8 +40,11 @@ class GithubService implements RepoInterface
         $client->setCache(new \Github\HttpClient\Cache\FilesystemCache('./data/cache/github-api-cache'));
 
         if (! empty($config['user_connect']['username']) && ! empty($config['user_connect']['password'])) {
-            $client->authenticate($config['user_connect']['username'], $config['user_connect']['password'], \Github\Client::AUTH_HTTP_PASSWORD);
-        } elseif (! empty($config['oauth']['oauth_consumer_key']) && ! empty($config['oauth']['oauth_consumer_secret'])) {
+            $client->authenticate($config['user_connect']['username'],
+                                $config['user_connect']['password'],
+                                \Github\Client::AUTH_HTTP_PASSWORD);
+        } elseif (! empty($config['oauth']['oauth_consumer_key']) && 
+                  ! empty($config['oauth']['oauth_consumer_secret'])) {
             echo "no oauth";
             throw new \Exception('Oauth Not supported yet');
         } else {
@@ -64,7 +67,7 @@ class GithubService implements RepoInterface
      * @todo inject hydrator
      * @todo inject IssueService
      */
-    public function getIssuesFromRepo($account = null, $repo=null,  array $filter = [])
+    public function getIssuesFromRepo($account = null, $repo = null, array $filter = [])
     {
         if ($repo == null) {
             throw new \InvalidArgumentException('No repo parameter specified.');

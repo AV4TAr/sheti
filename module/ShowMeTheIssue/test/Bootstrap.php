@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL | E_STRICT);
+chdir(__DIR__);
+
 namespace ShowMeTheIssueTest;
 
 use Zend\Loader\AutoloaderFactory;
@@ -6,9 +9,6 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 use RuntimeException;
-
-error_reporting(E_ALL | E_STRICT);
-chdir(__DIR__);
 
 class Bootstrap
 {
@@ -37,7 +37,8 @@ class Bootstrap
         }
 
         $zf2ModulePaths  = implode(PATH_SEPARATOR, $zf2ModulePaths) . PATH_SEPARATOR;
-        $zf2ModulePaths .= getenv('ZF2_MODULES_TEST_PATHS') ?: (defined('ZF2_MODULES_TEST_PATHS') ? ZF2_MODULES_TEST_PATHS : '');
+        $zf2ModulePaths .= getenv('ZF2_MODULES_TEST_PATHS') ?: (defined('ZF2_MODULES_TEST_PATHS')
+                           ? ZF2_MODULES_TEST_PATHS : '');
 
         static::initAutoloader();
 
@@ -75,10 +76,12 @@ class Bootstrap
         if (is_readable($vendorPath . '/autoload.php')) {
             $loader = include $vendorPath . '/autoload.php';
         } else {
-            $zf2Path = getenv('ZF2_PATH') ?: (defined('ZF2_PATH') ? ZF2_PATH : (is_dir($vendorPath . '/ZF2/library') ? $vendorPath . '/ZF2/library' : false));
+            $zf2Path = getenv('ZF2_PATH') ?: (defined('ZF2_PATH') ? ZF2_PATH : (is_dir($vendorPath . '/ZF2/library')
+                                                                  ? $vendorPath . '/ZF2/library' : false));
 
             if (!$zf2Path) {
-                throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+                throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a 
+                ZF2_PATH environment variable.');
             }
 
             include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
@@ -101,7 +104,9 @@ class Bootstrap
         $previousDir = '.';
         while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
-            if ($previousDir === $dir) return false;
+            if ($previousDir === $dir){
+                return false;
+            }
             $previousDir = $dir;
         }
 

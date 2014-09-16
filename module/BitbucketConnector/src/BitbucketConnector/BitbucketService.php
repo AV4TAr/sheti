@@ -32,10 +32,10 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
      */
     public function __construct(array $config)
     {
-        if (!(isset($config['oauth']['oauth_consumer_key']) && $config['oauth']['oauth_consumer_key']!=NULL)) {
+        if (!(isset($config['oauth']['oauth_consumer_key']) && $config['oauth']['oauth_consumer_key']!=null)) {
             throw new \Exception('Bitbucket Connector need configuration');
         }
-        if (!(isset($config['oauth']['oauth_consumer_secret']) && $config['oauth']['oauth_consumer_secret']!=NULL)) {
+        if (!(isset($config['oauth']['oauth_consumer_secret']) && $config['oauth']['oauth_consumer_secret']!=null)) {
             throw new \Exception('Bitbucket Connector need configuration');
         }
 
@@ -65,12 +65,11 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
         $issueList = new IssueCollection();
         $issueHydrator = new IssueHydrator();
         foreach ($issues['issues'] as $issue) {
-           $issueObject = new Issue();
-           $issueHydrator->hydrate($issue, $issueObject);
-           $issueList[] = $issueObject;
+            $issueObject = new Issue();
+            $issueHydrator->hydrate($issue, $issueObject);
+            $issueList[] = $issueObject;
         }
 
         return $issueList;
     }
-
 }

@@ -2,6 +2,7 @@
 namespace ShowMeTheIssue\Collection;
 
 use Zend\Stdlib\ArrayObject;
+
 /**
  *
  * @author diego
