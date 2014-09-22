@@ -8,7 +8,7 @@ The prupose of this app is to publish issues from different code repositories (b
 
 It's a ZF2 cli app that will connect to repos, get the issues, process them and publish them in hipchat rooms.
 
-## Problem
+## Problem.
 
    We use bitbucket issue management module to handle bugs / features.
    The "bug" email notification is lost in the avalanche of notifications we receive daily.
