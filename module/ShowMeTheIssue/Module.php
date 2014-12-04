@@ -76,8 +76,8 @@ class Module implements AutoloaderProviderInterface
         $sm = $e->getApplication()->getServiceManager();
         $shem = $sm->get('SharedEventManager');
 
-        $listener = $sm->get('IssueCacheListener');
+        //$listener = $sm->get('IssueCacheListener');
 
-        $listener->attachShared($shem);
+        //$listener->attachShared($shem);
     }
 }

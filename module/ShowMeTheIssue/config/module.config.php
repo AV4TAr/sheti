@@ -54,6 +54,7 @@ return array(
             'ShowMeTheIssue\Issue' => false
         ]
     ],
+
     'caches' => [
         'Cache\Issues' => [
             'adapter' => 'filesystem',

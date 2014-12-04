@@ -31,16 +31,25 @@ class IssueHydrator
     public function hydrate(array $data, $object)
     {
         $exchangeArray = [
-           'id' => $data['number'],
-           'title' => $data['title'],
-           'description' => $data['body'],
-           'asignee' => $data['asignee'],
-           'created_at' => $data['created_at'],
-           'updated_at' => $data['updated_at'],
+           'id' => $data['local_id'],
+           'title' => $data['title'], 'created_at' => $data['utc_created_on'],
+           'updated_at' => $data['utc_last_updated'],
            'kind' => 'issue',
            'priority' => '',
-           'status' => $data['state'],
+           'status' => $data['status'],
         ];
-        $object->exchangeArray($data);
+
+        $exchangeArray['description'] = '';
+        if(isset($data['content'])){
+            $exchangeArray['description'] = $data['content'];
+        }
+
+        $exchangeArray['asignee'] = '';
+        if(isset($data['responsible'])) {
+            $exchangeArray['asignee'] = $data['responsible']['first_name'] . ' ' . $data['responsible']['last_name'];
+        }
+
+
+        $object->exchangeArray($exchangeArray);
     }
 }
