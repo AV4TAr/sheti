@@ -1,5 +1,7 @@
 # SHow mE the Issues
 
+pull
+
 [![Build Status](https://travis-ci.org/AV4TAr/show-me-the-issues.svg?branch=master)](https://travis-ci.org/AV4TAr/show-me-the-issues)
 
 SHETI : pronounced /ˈʃeti/
@@ -58,7 +60,7 @@ Posts issues to hipchat room
 
 # TODO
 
-  - Add tests for service & Connectors (doing)
+  - Add tests for service & Connectors (doing need more)
   - Create a service for SHETI
   - Add connegtor for GitHub (done)
   - Add connector for Jira

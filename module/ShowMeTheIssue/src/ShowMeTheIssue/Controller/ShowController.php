@@ -35,7 +35,7 @@ class ShowController extends AbstractActionController
 
         $enableHipchat = $request->getParam('enable-hipchat');
         $addImage = $request->getParam('add-image', false);
-        $defaultRoom = $request->getParam('hipchat-room');
+
         $verbose = $request->getParam('verbose');
         $filterRepo = $request->getParam('repo', false);
 
@@ -131,20 +131,9 @@ class ShowController extends AbstractActionController
                 }
 
                 // publish.pre event
-                if ($enableHipchat) {
-                    if ($verbose) {
-                        echo '       ** Publishing to hipchat room: ' . $data['hipchat-room'] . PHP_EOL;
-                    }
-                    $hc = new HipChat($config['hipchat']['api-token']);
-                    $hipchatRoom = $data['hipchat-room'];
-                    if ($defaultRoom) {
-                        $hipchatRoom = $defaultRoom;
-                    }
-                    if ($verbose) {
-                        echo 'Publishing issues to bitbucket room - ' . $hipchatRoom . PHP_EOL;
-                    }
-                    $hc->message_room($hipchatRoom, 'Issues', $issue_msg);
-                }
+
+                publishToHipchat($data, $issue_msg); //TODO TERMINAR ESTO
+
                 // publish.post event
             } catch (\Exception $e) {
                 throw $e;
@@ -153,5 +142,27 @@ class ShowController extends AbstractActionController
         }
 
         return '--- DONE ---' . PHP_EOL;
+    }
+
+    private function publishToHipchat($data, $issue_msg)
+    {
+        $config = $this->getServiceLocator()->get('config')['show-me-the-issue'];
+        $defaultRoom = $this->getRequest()->getParam('hipchat-room');
+
+        if($this->getRequest()->getParam('enable-hipchat')){
+            if($this->getRequest()->getParam('verbose')){
+                echo '       ** Publishing to hipchat room: ' . $data['hipchat-room'] . PHP_EOL;
+            }
+            $hc = new HipChat($config['hipchat']['api-token']);
+            $hipchatRoom = $data['hipchat-room'];
+            if ($defaultRoom) {
+                $hipchatRoom = $defaultRoom;
+            }
+            if($this->getRequest()->getParam('verbose')){
+                echo 'Publishing issues to bitbucket room - ' . $hipchatRoom . PHP_EOL;
+            }
+            $hc->message_room($hipchatRoom, 'Issues', $issue_msg);
+        }
+
     }
 }

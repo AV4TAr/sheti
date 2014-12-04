@@ -67,7 +67,7 @@ class BitbucketService implements RepoInterface, ServiceLocatorAwareInterface
         foreach ($issues['issues'] as $issue) {
             $issueObject = new Issue();
             $issueHydrator->hydrate($issue, $issueObject);
-            $issueList[] = $issueObject;
+            $issueList->append($issueObject);
         }
 
         return $issueList;
