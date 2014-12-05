@@ -40,7 +40,7 @@ It's a ZF2 cli app that will connect to repos, get the issues, process them and 
 See 
 ```bash
 ➜  show-me-the-issue git:(master) ✗ php public/index.php
-Show Me The Issue v0.1
+Show Me The Issue
 
 ------------------------------------------------------------------------
 ShowMeTheIssue

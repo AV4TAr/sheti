@@ -48,7 +48,7 @@ class Module implements AutoloaderProviderInterface
 
     public function getConsoleBanner(Console $console)
     {
-        return "Show Me The Issue v0.1";
+        return "Show Me The Issue";
     }
 
     public function getConsoleUsage(Console $console)
