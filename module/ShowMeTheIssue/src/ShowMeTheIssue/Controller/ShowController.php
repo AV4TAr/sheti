@@ -132,7 +132,7 @@ class ShowController extends AbstractActionController
 
                 // publish.pre event
 
-                publishToHipchat($data, $issue_msg); //TODO TERMINAR ESTO
+                $this->publishToHipchat($data, $issue_msg); //TODO TERMINAR ESTO
 
                 // publish.post event
             } catch (\Exception $e) {
