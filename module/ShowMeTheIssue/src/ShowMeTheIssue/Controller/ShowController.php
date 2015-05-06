@@ -109,13 +109,15 @@ class ShowController extends AbstractActionController
                     }
                 } else {
                     $i = 1;
+                    $issue_msg .= '<ul>';
                     foreach ($issue_response as $issue) {
-                        $issue_msg .= $issue->title . '<br/>';
+                        $issue_msg .= '<li>'.$issue->title . '</li>';
                         if ($verbose) {
                             echo '       ' . $i . ' - ' . $issue . PHP_EOL;
                         }
                         $i ++;
                     }
+                    $issue_msg .= '</ul>';
                     if ($addImage) {
                         $issue_msg .= '<img src="'
                                     . $config['yes-issue-images'][rand(0, count($config['yes-issue-images']) - 1)]
